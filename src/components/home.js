@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, StyleSheet, Image, Dimensions, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, Dimensions, ActivityIndicator, ImageBackground } from 'react-native'
 import { getPhotos } from '../utils/Api'
 import { FlatList } from 'react-native-gesture-handler'
 
@@ -22,12 +22,13 @@ const Home = () => {
 
     const _renderItem = (item) => {
         return (
-            <View style={styles.imagContainer}>
-                <Image
-                    style={styles.image}
-                    source={{ uri: item.urls.regular }}
-                />
-            </View>
+                <View style={styles.imagContainer}>
+                    <Image
+                        style={styles.image}
+                        source={{ uri: item.urls.regular }}
+                    >
+                    </Image>
+                </View>
         )
     }
 
@@ -39,10 +40,10 @@ const Home = () => {
                     paddingVertical: 10,
                     // borderTopWidth: 1,
                     // borderColor: "#CED0CE",
-                    backgroundColor: '#eee',
+                    backgroundColor: '#fafafa',
                 }}
             >
-                <ActivityIndicator animating size="large" />
+                <ActivityIndicator animating size="large" color="#d9d9d9" />
             </View>
         );
     }
@@ -56,12 +57,12 @@ const Home = () => {
             {data.length > 1 ? <FlatList
                 data={data}
                 renderItem={({ item }) => _renderItem(item)}
-                key={item => item.id + Math.random() / 2}
+                key={item => item.id}
                 numColumns={2}
                 onEndReached={_loadMore}
                 ListFooterComponent={_footer}
                 contentContainerStyle={{ borderBottomWidth: 0 }}
-            /> : <ActivityIndicator animating size="large" />
+            /> : <ActivityIndicator animating size="large" color="#d9d9d9" />
             }
         </SafeAreaView>
 
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        backgroundColor: '#eee',
+        backgroundColor: '#fafafa',
         elevation: 10,
         borderRadius: 2,
         margin: 10,

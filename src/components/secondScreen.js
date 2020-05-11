@@ -40,7 +40,7 @@ const SecondScreen = () => {
                     backgroundColor: '#eee',
                 }}
             >
-                <ActivityIndicator animating size="large" />
+                <ActivityIndicator animating size="large"  color="#d9d9d9"/>
             </View>
         );
     }
@@ -54,12 +54,12 @@ const SecondScreen = () => {
             {data.length > 1 ? <FlatList
                 data={data}
                 renderItem={({ item }) => _renderItem(item)}
-                key={item => item.id + Math.random() / 2}
+                key={item => item.id }
                 numColumns={2}
                 onEndReached={_loadMore}
                 ListFooterComponent={_footer}
                 contentContainerStyle={{ borderBottomWidth: 0 }}
-            /> : <ActivityIndicator animating size="large" />
+            /> : <ActivityIndicator animating size="large"  color="#d9d9d9" />
             }
         </SafeAreaView>
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        backgroundColor: '#eee',
+        backgroundColor: '#fafafa',
         elevation: 10,
         borderRadius: 2,
         margin: 10,

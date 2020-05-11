@@ -6,8 +6,30 @@ import SecondScreen from './src/components/secondScreen';
 
 
 const TabNavigator = createMaterialTopTabNavigator({
-  Home,
-  SecondScreen
+  Nature:Home,
+  Pets:SecondScreen
+},{
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 18,
+      // color:'#000',
+    },
+    style: {
+      backgroundColor: '#d9d9d9',
+      width:'70%',
+      alignSelf:'center',
+      height:50,
+      elevation:10,
+      marginTop:'5%',
+      marginBottom:'5%',
+      borderRadius:10
+    },
+    indicatorStyle:{
+      maxHeight:0
+    },
+    activeTintColor:'black',
+    inactiveTintColor :'white'
+  },
 })
 
 
