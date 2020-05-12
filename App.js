@@ -19,7 +19,7 @@ const TabNavigator = createMaterialTopTabNavigator({
       width:'70%',
       alignSelf:'center',
       height:50,
-      elevation:10,
+      elevation:5,
       marginTop:'5%',
       marginBottom:'5%',
       borderRadius:10

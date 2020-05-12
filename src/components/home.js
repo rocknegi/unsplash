@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, StyleSheet, Image, Dimensions, ActivityIndicator, ImageBackground } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, Dimensions, ActivityIndicator, FlatList } from 'react-native'
 import { getPhotos } from '../utils/Api'
-import { FlatList } from 'react-native-gesture-handler'
 
 console.disableYellowBox = true;
 
@@ -12,22 +11,22 @@ const Home = () => {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false)
 
-    const fetchData = async () => {
-        const res = await getPhotos(1580860);
+    const fetchData = async (pageNo=1) => {
+        const res = await getPhotos(1580860,pageNo);
         page === 1 ? setData(res) : setData([...data, ...res])
     }
     useEffect(() => {
         fetchData();
-    }, [page])
+    }, [])
 
     const _renderItem = (item) => {
         return (
                 <View style={styles.imagContainer}>
-                    <Image
+                   <Image
                         style={styles.image}
                         source={{ uri: item.urls.regular }}
-                    >
-                    </Image>
+                    />
+
                 </View>
         )
     }
@@ -51,6 +50,7 @@ const Home = () => {
     const _loadMore = () => {
         setLoading(true)
         setPage(page + 1)
+        fetchData(page);
     }
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
@@ -60,6 +60,7 @@ const Home = () => {
                 key={item => item.id}
                 numColumns={2}
                 onEndReached={_loadMore}
+                onEndReachedThreshold={0.1}
                 ListFooterComponent={_footer}
                 contentContainerStyle={{ borderBottomWidth: 0 }}
             /> : <ActivityIndicator animating size="large" color="#d9d9d9" />
@@ -80,11 +81,11 @@ const styles = StyleSheet.create({
         elevation: 10,
         borderRadius: 2,
         margin: 10,
-        borderWidth: 1
     },
 
     image: {
-        width: width / 2.3, height: width / 2,
+        width: width / 2.2,
+        height: width /1.5,
         resizeMode: 'cover'
     }
 })
